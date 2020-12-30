@@ -770,13 +770,11 @@ func (sc *shipyardController) sendTaskTriggeredEvent(keptnContext string, eventS
 
 	var mergedPayload interface{}
 	mergedPayload = nil
-	if previousFinishedEvents != nil {
-		for index := range previousFinishedEvents {
-			if mergedPayload == nil {
-				mergedPayload = merge(eventPayload, previousFinishedEvents[index])
-			} else {
-				mergedPayload = merge(mergedPayload, previousFinishedEvents[index])
-			}
+	for index := range previousFinishedEvents {
+		if mergedPayload == nil {
+			mergedPayload = merge(eventPayload, previousFinishedEvents[index])
+		} else {
+			mergedPayload = merge(mergedPayload, previousFinishedEvents[index])
 		}
 	}
 
