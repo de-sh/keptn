@@ -211,10 +211,8 @@ func doInstallation() error {
 		if !(in == "y" || in == "yes") {
 			return fmt.Errorf("Stopping installation.")
 		}
-	} else {
-		if err := keptnutils.CreateNamespace(false, keptnNamespace); err != nil {
-			return fmt.Errorf("Failed to create Keptn namespace %s: %v", keptnNamespace, err)
-		}
+	} else if err := keptnutils.CreateNamespace(false, keptnNamespace); err != nil {
+		return fmt.Errorf("Failed to create Keptn namespace %s: %v", keptnNamespace, err)
 	}
 
 	values := map[string]interface{}{

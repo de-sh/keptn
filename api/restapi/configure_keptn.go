@@ -5,12 +5,13 @@ package restapi
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/keptn/keptn/api/restapi/operations/evaluation"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/keptn/keptn/api/restapi/operations/evaluation"
 
 	keptnapi "github.com/keptn/go-utils/pkg/api/utils"
 
@@ -117,8 +118,8 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 		// Set the prefix-path in the swagger.yaml
 		input, err := ioutil.ReadFile("swagger-ui/swagger.yaml")
 		if err == nil {
-			editedSwagger := strings.Replace(string(input), "basePath: /api/v1",
-				"basePath: "+prefixPath+"/api/v1", -1)
+			editedSwagger := strings.ReplaceAll(string(input), "basePath: /api/v1",
+				"basePath: "+prefixPath+"/api/v1")
 			err = ioutil.WriteFile("swagger-ui/swagger.yaml", []byte(editedSwagger), 0644)
 			if err != nil {
 				fmt.Println("Failed to write edited swagger.yaml")
@@ -130,8 +131,8 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 		// Set the prefix-path in the index.html
 		input, err = ioutil.ReadFile("swagger-ui/index.html")
 		if err == nil {
-			editedSwagger := strings.Replace(string(input), "const prefixPath = \"\"",
-				"const prefixPath = \""+prefixPath+"\"", -1)
+			editedSwagger := strings.ReplaceAll(string(input), "const prefixPath = \"\"",
+				"const prefixPath = \""+prefixPath+"\"")
 			err = ioutil.WriteFile("swagger-ui/index.html", []byte(editedSwagger), 0644)
 			if err != nil {
 				fmt.Println("Failed to write edited index.html")

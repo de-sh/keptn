@@ -100,7 +100,7 @@ func (mng PlatformManager) ReadCreds() error {
 	}
 
 	newCreds, _ := json.Marshal(mng.platform.getCreds())
-	newCredsStr := strings.Replace(string(newCreds), "\r\n", "\n", -1)
-	newCredsStr = strings.Replace(newCredsStr, "\n", "", -1)
+	newCredsStr := strings.ReplaceAll(string(newCreds), "\r\n", "\n")
+	newCredsStr = strings.ReplaceAll(newCredsStr, "\n", "")
 	return cm.SetInstallCreds(newCredsStr)
 }

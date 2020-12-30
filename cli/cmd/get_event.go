@@ -146,7 +146,7 @@ func init() {
 }
 
 func setParameterValue(value string, defaultValue string) string {
-	if len(value) == 0 {
+	if value == "" {
 		return defaultValue
 	}
 	return value

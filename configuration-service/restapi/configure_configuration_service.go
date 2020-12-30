@@ -5,12 +5,13 @@ package restapi
 import (
 	"crypto/tls"
 	"fmt"
-	keptncommon "github.com/keptn/go-utils/pkg/lib/keptn"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
 	"strings"
+
+	keptncommon "github.com/keptn/go-utils/pkg/lib/keptn"
 
 	keptnapi "github.com/keptn/go-utils/pkg/api/utils"
 	"github.com/keptn/keptn/configuration-service/restapi/operations/event"
@@ -191,8 +192,8 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 		// Set the prefix-path in the swagger.yaml
 		input, err := ioutil.ReadFile("swagger-ui/swagger.yaml")
 		if err == nil {
-			editedSwagger := strings.Replace(string(input), "basePath: /api/configuration-service/v1",
-				"basePath: "+prefixPath+"/api/configuration-service/v1", -1)
+			editedSwagger := strings.ReplaceAll(string(input), "basePath: /api/configuration-service/v1",
+				"basePath: "+prefixPath+"/api/configuration-service/v1")
 			err = ioutil.WriteFile("swagger-ui/swagger.yaml", []byte(editedSwagger), 0644)
 			if err != nil {
 				fmt.Println("Failed to write edited swagger.yaml")

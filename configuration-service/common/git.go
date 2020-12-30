@@ -4,16 +4,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
+	"os"
+	"strings"
+	"time"
+
 	"github.com/keptn/keptn/configuration-service/config"
 	"github.com/keptn/keptn/configuration-service/models"
 	utils "github.com/keptn/kubernetes-utils/pkg"
 	k8serrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
-	"net/url"
-	"os"
-	"strings"
-	"time"
 )
 
 // GitCredentials contains git ccredentials info
@@ -348,7 +349,7 @@ func GetDefaultBranch(project string) (string, error) {
 func addRepoURIToMetadata(credentials *GitCredentials, metadata *models.Version) {
 	// the git token should not be included in the repo URI in the first place, but let's make sure it's hidden in any case
 	remoteURI := credentials.RemoteURI
-	remoteURI = strings.Replace(remoteURI, credentials.Token, "********", -1)
+	remoteURI = strings.ReplaceAll(remoteURI, credentials.Token, "********")
 	metadata.UpstreamURL = remoteURI
 }
 

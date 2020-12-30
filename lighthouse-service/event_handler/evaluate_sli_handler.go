@@ -5,12 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	cloudevents "github.com/cloudevents/sdk-go/v2"
-	"github.com/ghodss/yaml"
-	keptnapi "github.com/keptn/go-utils/pkg/api/utils"
-	keptn "github.com/keptn/go-utils/pkg/lib"
-	keptnv2 "github.com/keptn/go-utils/pkg/lib/v0_2_0"
-	"github.com/mitchellh/mapstructure"
 	"io/ioutil"
 	"math"
 	"net/http"
@@ -18,6 +12,13 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	cloudevents "github.com/cloudevents/sdk-go/v2"
+	"github.com/ghodss/yaml"
+	keptnapi "github.com/keptn/go-utils/pkg/api/utils"
+	keptn "github.com/keptn/go-utils/pkg/lib"
+	keptnv2 "github.com/keptn/go-utils/pkg/lib/v0_2_0"
+	"github.com/mitchellh/mapstructure"
 )
 
 type datastoreResult struct {
@@ -480,7 +481,7 @@ func parseCriteriaString(criteria string) (*criteriaObject, error) {
 	re = regexp.MustCompile(regex)
 
 	// remove whitespaces
-	criteria = strings.Replace(criteria, " ", "", -1)
+	criteria = strings.ReplaceAll(criteria, " ", "")
 
 	if !re.MatchString(criteria) {
 		return nil, errors.New("invalid criteria string")
