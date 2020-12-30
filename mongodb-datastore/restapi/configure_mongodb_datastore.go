@@ -98,8 +98,8 @@ func setupGlobalMiddleware(handler http.Handler) http.Handler {
 		// Set the prefix-path in the swagger.yaml
 		input, err := ioutil.ReadFile("swagger-ui/swagger.yaml")
 		if err == nil {
-			editedSwagger := strings.Replace(string(input), "basePath: /api/mongodb-datastore",
-				"basePath: "+prefixPath+"/api/mongodb-datastore", -1)
+			editedSwagger := strings.ReplaceAll(string(input), "basePath: /api/mongodb-datastore",
+				"basePath: "+prefixPath+"/api/mongodb-datastore")
 			err = ioutil.WriteFile("swagger-ui/swagger.yaml", []byte(editedSwagger), 0644)
 			if err != nil {
 				fmt.Println("Failed to write edited swagger.yaml")

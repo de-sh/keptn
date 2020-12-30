@@ -78,7 +78,7 @@ func (cm *CredentialManager) GetCreds(namespace string) (url.URL, string, error)
 		if err != nil {
 			return url.URL{}, "", err
 		}
-		dataStr := strings.TrimSpace(strings.Replace(string(data), "\r\n", "\n", -1))
+		dataStr := strings.TrimSpace(strings.ReplaceAll(string(data), "\r\n", "\n"))
 		creds := strings.Split(dataStr, "\n")
 		if len(creds) != 2 {
 			return url.URL{}, "", errors.New("Format of file-based key storage is invalid")
@@ -106,7 +106,7 @@ func (cm *CredentialManager) GetInstallCreds() (string, error) {
 		if err != nil {
 			return "", err
 		}
-		dataStr := strings.TrimSpace(strings.Replace(string(data), "\r\n", "\n", -1))
+		dataStr := strings.TrimSpace(strings.ReplaceAll(string(data), "\r\n", "\n"))
 		return dataStr, nil
 	}
 	return getInstallCreds(pass.Pass{})

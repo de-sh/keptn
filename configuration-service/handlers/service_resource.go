@@ -3,12 +3,13 @@ package handlers
 import (
 	"encoding/base64"
 	"fmt"
-	keptncommon "github.com/keptn/go-utils/pkg/lib/keptn"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	keptncommon "github.com/keptn/go-utils/pkg/lib/keptn"
 
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/swag"
@@ -54,7 +55,7 @@ func GetProjectProjectNameStageStageNameServiceServiceNameResourceResourceURIHan
 	if strings.Contains(resourcePath, "helm") && strings.Contains(params.ResourceURI, ".tgz") {
 		logger.Debug("Archive the Helm chart: " + params.ResourceURI)
 
-		chartDir := strings.Replace(resourcePath, ".tgz", "", -1)
+		chartDir := strings.ReplaceAll(resourcePath, ".tgz", "")
 		if !common.FileExists(chartDir) {
 			return service_resource.NewGetProjectProjectNameStageStageNameServiceServiceNameResourceResourceURINotFound().
 				WithPayload(&models.Error{Code: 404, Message: swag.String("Service resource not found")})

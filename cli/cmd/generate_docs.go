@@ -56,7 +56,7 @@ keptn generate docs --dir=/some/directory`,
 		prepender := func(filename string) string {
 			name := filepath.Base(filename)
 			base := strings.TrimSuffix(name, path.Ext(name))
-			return fmt.Sprintf(gendocFrontmatterTemplate, now, strings.Replace(base, "_", " ", -1), base)
+			return fmt.Sprintf(gendocFrontmatterTemplate, now, strings.ReplaceAll(base, "_", " "), base)
 		}
 
 		// links need to be converted to be compatible with hugo

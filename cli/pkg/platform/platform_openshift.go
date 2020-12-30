@@ -117,7 +117,7 @@ func readUserInput(value *string, regex string, promptMessage string, regexViola
 	for keepAsking {
 		fmt.Printf("%s [%s]: ", promptMessage, *value)
 		userInput, _ := reader.ReadString('\n')
-		userInput = strings.TrimSpace(strings.Replace(userInput, "\r\n", "\n", -1))
+		userInput = strings.TrimSpace(strings.ReplaceAll(userInput, "\r\n", "\n"))
 		if userInput != "" || *value == "" {
 			if validateRegex && !re.MatchString(userInput) {
 				fmt.Println(regexViolationMessage)
