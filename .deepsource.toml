@@ -1,0 +1,23 @@
+version = 1
+
+test_patterns = ["test/**", "*_test.go"]
+
+[[analyzers]]
+name = "go"
+enabled = true
+
+  [analyzers.meta]
+  import_paths = [
+    "github.com/keptn/keptn/api",
+    "github.com/keptn/keptn/cli",
+    "github.com/keptn/keptn/configuration-service",
+    "github.com/keptn/keptn/distributor",
+    "github.com/keptn/keptn/gatekeeper-service",
+    "github.com/keptn/keptn/helm-service",
+    "github.com/keptn/keptn/lighthouse-service",
+    "github.com/keptn/keptn/mongodb-datastore",
+    "github.com/keptn/keptn/platform-support/openshift-route-service",
+    "github.com/keptn/keptn/remediation-service",
+    "github.com/keptn/keptn/shipyard-controller",
+  ]
+  import_root = "github.com/keptn/keptn"
